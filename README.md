@@ -198,7 +198,3 @@ It is a scalable, open-source platform designed especially for academic institut
 Contributions are welcome. Feel free to open issues or submit pull requests.
 
 ---
-
-## License
-
-This project is open source and available under the MIT License.
