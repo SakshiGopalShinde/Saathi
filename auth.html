@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saathi | Login & Register</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .auth-center {
+            min-height: calc(100vh - 100px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 5%;
+        }
+        #auth-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 3rem;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 1000ms var(--bezier-smooth);
+            background-color: transparent;
+        }
+
+        .flip-active {
+            transform: rotateY(180deg);
+        }
+
+        .auth-form-card {
+            position: absolute;
+            width: 100%;
+            backface-visibility: hidden;
+            background-color: var(--color-bg-card);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--glow-effect), var(--shadow-soft);
+            border: 2px solid var(--color-accent-secondary);
+            will-change: transform;
+        }
+        
+        #register-form {
+            transform: rotateY(180deg);
+        }
+        
+        .auth-form-card h2 {
+            text-align: left;
+            margin-bottom: 2rem;
+            color: var(--color-accent-primary);
+            font-size: 2.2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        .input-group label {
+            color: var(--color-text-primary);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .switch-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .switch-link button {
+            background: none;
+            border: none;
+            color: var(--color-accent-primary);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <span class="material-icons">self_improvement</span>
+            Saathi
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="appointments.html">Appointments</a>
+            <a href="resources.html">Resources</a>
+            <a href="forum.html">Peer Support</a>
+            <a href="tracker.html">Habits</a>
+        </nav>
+        <a href="auth.html" class="cta-button">Join Saathi</a>
+    </header>
+
+    <div class="auth-center">
+        <div id="auth-container">
+            <form id="login-form" class="auth-form-card">
+                <h2>Welcome Back</h2>
+                <div class="input-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;">Log In</button>
+                <div class="switch-link">
+                    Need an account? <button type="button" id="switch-to-register">Create Account</button>
+                </div>
+            </form>
+
+            <form id="register-form" class="auth-form-card">
+                <h2>Create Account</h2>
+                <div class="input-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="input-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="input-group">
+                    <label for="register-confirm-password">Confirm Password</label>
+                    <input type="password" id="register-confirm-password" required>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;">Register</button>
+                <div class="switch-link">
+                    Already a member? <button type="button" id="switch-to-login">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Saathi | Team PsyConnect. All rights reserved.</p>
+    </footer>
+    
+    <script src="auth.js"></script>
+</body>
+</html>

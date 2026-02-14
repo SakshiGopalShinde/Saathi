@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login - Saathi</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="wave-bg"></div>
+    <header>
+        <h1>Student Login</h1>
+    </header>
+    <nav><a href="index.html">Home</a></nav>
+    <main id="main" class="container">
+        <form id="login-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required aria-describedby="email-help">
+            <span id="email-help" class="sr-only">Enter your registered email.</span>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <label><input type="checkbox" id="anonymous"> Use Anonymously (Limited Access)</label>
+            <button type="submit">Login</button>
+        </form>
+        <p class="trust-icon">🔒 Your data is secure and confidential.</p>
+    </main>
+    <footer>&copy; 2023 Saathi.</footer>
+    <script src="js/script.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate login (replace with real auth)
+            alert('Login successful! Redirecting...');
+            window.location.href = 'dashboard.html';
+        });
+    </script>
+</body>
+
+</html>

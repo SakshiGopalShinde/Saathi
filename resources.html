@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saathi | Resources & Meditation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .resources-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+        }
+
+        /* Tab Navigation (Unique Underline Effect) */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        .tab-button {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 300ms;
+            position: relative;
+        }
+        .tab-button.active {
+            color: var(--color-accent-primary);
+        }
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--color-accent-primary);
+            transition: width 300ms ease, left 300ms ease;
+            box-shadow: 0 0 5px var(--color-accent-primary);
+        }
+        .tab-button.active::after {
+            width: 80%;
+            left: 10%;
+        }
+
+        /* Meditation Player - Glowing Circle */
+        #meditation-content {
+            text-align: center;
+        }
+        .audio-player-mock {
+            background-color: var(--color-bg-card);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 2rem auto;
+            box-shadow: var(--glow-effect);
+        }
+        #meditation-toggle {
+            background: radial-gradient(circle, var(--color-accent-primary) 0%, #3A4C6B 100%);
+            color: var(--color-bg-primary);
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            font-size: 2rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 400ms;
+            border: 4px solid var(--color-text-primary);
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(140, 140, 255, 0.7);
+        }
+        #meditation-toggle:hover {
+            transform: scale(1.05);
+            background: radial-gradient(circle, #A3A3FF 0%, #403A60 100%);
+        }
+        .wave-animation {
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .wave-animation-bar {
+            width: 3%;
+            background-color: var(--color-accent-primary);
+            border-radius: 2px;
+            animation: pulse 1s infinite alternate;
+            box-shadow: 0 0 5px var(--color-accent-primary);
+        }
+        @keyframes pulse {
+            0% { height: 20%; }
+            100% { height: 100%; }
+        }
+
+        /* Slider/Carousel Styles - Unique 3D Look */
+        #slider-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+        .book-slider {
+            display: flex;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 1rem 0;
+            margin: 0 -2%;
+        }
+        .book-slider::-webkit-scrollbar {
+            display: none;
+        }
+        .book-card {
+            flex: 0 0 280px; 
+            margin: 0 1rem;
+            padding: 2rem;
+            border-radius: 18px;
+            background-color: var(--color-bg-card);
+            box-shadow: var(--shadow-soft);
+            transition: transform 400ms var(--bezier-smooth), opacity 400ms;
+            position: relative;
+            transform-origin: center;
+        }
+        .book-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 3px solid var(--color-accent-primary);
+        }
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 5%;
+            pointer-events: none; /* Allows clicks through to the content */
+        }
+        .slider-controls button {
+            background: rgba(30, 26, 60, 0.9);
+            color: var(--color-accent-primary);
+            border: 1px solid var(--color-accent-secondary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: all 300ms;
+            pointer-events: all; /* Re-enable clicks on buttons */
+        }
+        .slider-controls button:hover {
+            background: var(--color-accent-primary);
+            color: var(--color-bg-primary);
+        }
+
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <span class="material-icons">self_improvement</span>
+            Saathi
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="appointments.html">Appointments</a>
+            <a href="resources.html">Resources</a>
+            <a href="forum.html">Peer Support</a>
+            <a href="tracker.html">Habits</a>
+        </nav>
+        <a href="auth.html" class="cta-button">Join Saathi</a>
+    </header>
+
+    <section>
+        <h2>Psychoeducational Resources</h2>
+        <div class="resources-container">
+            
+            <div class="tab-nav" role="tablist" aria-label="Resource Categories">
+                <button class="tab-button active" id="tab-meditation" role="tab" aria-controls="meditation-content" aria-selected="true">Mindfulness Audio</button>
+                <button class="tab-button" id="tab-ebooks" role="tab" aria-controls="ebooks-content" aria-selected="false">Self-Help Library</button>
+                <button class="tab-button" id="tab-videos" role="tab" aria-controls="videos-content" aria-selected="false">Video Guides</button>
+            </div>
+            
+            <div id="meditation-content" class="step-content active" role="tabpanel">
+                <h3>Start Your Daily Pause</h3>
+                <div class="audio-player-mock">
+                    <p style="color: var(--color-accent-primary); font-weight: 500;">Guided Focus Session: 10 Minutes</p>
+                    <button id="meditation-toggle" aria-label="Play/Pause Meditation">
+                        <span class="material-icons" id="meditation-icon">play_arrow</span>
+                    </button>
+                    <div class="wave-animation">
+                        </div>
+                    <p style="margin-top: 1.5rem;" id="player-status">Ready to begin</p>
+                </div>
+            </div>
+
+            <div id="ebooks-content" class="step-content" role="tabpanel" aria-hidden="true" hidden>
+                <h3>Curated Mental Wellness Readings</h3>
+                <div id="slider-container" class="card-container">
+                    <div class="book-slider" id="book-slider">
+                        </div>
+                    <div class="slider-controls">
+                        <button id="slider-prev" aria-label="Previous Slide"><span class="material-icons">chevron_left</span></button>
+                        <button id="slider-next" aria-label="Next Slide"><span class="material-icons">chevron_right</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="videos-content" class.="step-content" role="tabpanel" aria-hidden="true" hidden>
+                <h3>Short Expert Video Guides</h3>
+                <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div class="card-container">
+                        <img src="https://via.placeholder.com/300x150/1E1A3C/C0C0D8?text=Lesson+1:+Anxiety+Management" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4>The 5-Minute De-stress</h4>
+                        <p>Quick techniques for exam pressure.</p>
+                    </div>
+                    <div class="card-container">
+                        <img src="https://via.placeholder.com/300x150/1E1A3C/C0C0D8?text=Lesson+2:+Better+Sleep" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4>Mastering Sleep Hygiene</h4>
+                        <p>Expert tips for students with erratic schedules.</p>
+                    </div>
+                    <div class="card-container">
+                        <img src="https://via.placeholder.com/300x150/1E1A3C/C0C0D8?text=Lesson+3:+Focus+Tech" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4>Digital Detox & Focus</h4>
+                        <p>How to minimize distractions while studying.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Saathi | Team PsyConnect. All rights reserved.</p>
+    </footer>
+    
+    <script src="resources.js"></script>
+</body>
+</html>

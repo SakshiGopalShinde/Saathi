@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saathi | Confidential Screening</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .screening-container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding-top: 5rem;
+        }
+
+        .disclaimer {
+            /* UPDATED FOR GREEN THEME */
+            background-color: var(--color-accent-secondary);
+            color: var(--color-text-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--color-accent-primary);
+        }
+
+        .question-card {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--color-accent-secondary);
+        }
+        .question-card h4 {
+            color: var(--color-text-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Custom Radio Buttons for Visual Appeal */
+        .answer-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .answer-options label {
+            background-color: var(--color-bg-card);
+            padding: 0.8rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 300ms;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+        .answer-options input[type="radio"] {
+            display: none;
+        }
+        .answer-options input[type="radio"]:checked + label {
+            /* UPDATED FOR GREEN THEME */
+            background-color: var(--color-accent-primary);
+            color: var(--color-bg-primary);
+            border-color: var(--color-accent-primary);
+            box-shadow: 0 0 10px rgba(52, 168, 83, 0.4); /* Green Glow */
+        }
+        
+        #results-area {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            /* UPDATED FOR GREEN THEME */
+            border: 2px solid var(--color-accent-primary);
+            margin-top: 3rem;
+            background-color: var(--color-bg-card);
+            border-radius: 18px;
+        }
+        #results-score {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--color-accent-primary);
+            /* UPDATED FOR GREEN THEME */
+            text-shadow: 0 0 15px rgba(52, 168, 83, 0.4); /* Green Glow */
+            margin-bottom: 1rem;
+        }
+        #results-interpretation {
+            font-size: 1.2rem;
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <span class="material-icons">self_improvement</span>
+            Saathi
+        </div>
+        <div class="header-right-container">
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="screening.html" style="color: var(--color-accent-primary); font-weight: 600;">Screening</a>
+                <a href="appointments.html">Appointments</a>
+                <a href="resources.html">Resources</a>
+                <a href="forum.html">Peer Support</a>
+                <a href="tracker.html">Habits</a>
+            </nav>
+            <a href="auth.html" class="cta-button">Join Saathi</a>
+        </div>
+    </header>
+
+    <section>
+        <h2>Confidential Mental Wellness Check</h2>
+        <div class="screening-container">
+            <div class="disclaimer">
+                <p style="color: var(--color-text-primary);">**Disclaimer:** This tool uses the PHQ-9 (Patient Health Questionnaire) for self-assessment. It is not a diagnosis. Your results are kept anonymous.</p>
+            </div>
+
+            <form id="phq-form">
+                <div id="questions-area">
+                    </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button type="submit" class="cta-button">View My Anonymous Results</button>
+                </div>
+            </form>
+            
+            <div id="results-area" class="card-container">
+                <h3>Your Anonymous Score:</h3>
+                <div id="results-score"></div>
+                <div id="results-interpretation"></div>
+                <p style="margin-top: 1.5rem; color: var(--color-text-secondary);">Based on your score, we recommend the following next steps:</p>
+                <a href="appointments.html" class="cta-button" style="margin-top: 1rem; margin-left: 0;">Book a Counsellor</a>
+                <a href="resources.html" class="nav-links" style="margin-left: 1rem;">Explore Resources</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Saathi - Your Partner for Mental Wellness</h3>
+        <div class="links">
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="auth.html">Admin Login</a>
+        </div>
+        <p style="margin-top: 10px;">&copy; 2025 Saathi | <span>Team PsyConnect</span>. All rights reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">A dedicated solution for the Smart India Hackathon 2025 (Problem Statement ID: 25092).</p>
+    </footer>
+    
+    <script>
+        // screening.js logic embedded 
+        document.addEventListener('DOMContentLoaded', () => {
+            const PHQ9_QUESTIONS_EN = [
+                "Little interest or pleasure in doing things",
+                "Feeling down, depressed, or hopeless",
+                "Trouble falling or staying asleep, or sleeping too much",
+                "Feeling tired or having little energy",
+                "Poor appetite or overeating",
+                "Feeling bad about yourself—or that you are a failure or have let yourself or your family down",
+                "Trouble concentrating on things, such as reading the newspaper or watching television",
+                "Moving or speaking so slowly that other people could have noticed. Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual",
+                "Thoughts that you would be better off dead, or of hurting yourself in some way"
+            ];
+            
+            const ANSWER_OPTIONS_EN = {
+                '0': 'Not at all (0)', 
+                '1': 'Several days (1)', 
+                '2': 'More than half the days (2)', 
+                '3': 'Nearly every day (3)'
+            };
+
+            // Using CSS variables where appropriate, keeping hardcoded colors for high-severity warnings
+            const INTERPRETATIONS = [
+                { score: 0, text_en: "Minimal Depression. Keep focusing on your wellness!", color: "var(--color-success)" },
+                { score: 5, text_en: "Mild Depression. Our resources and AI chat can offer good support.", color: "var(--color-accent-primary)" },
+                { score: 10, text_en: "Moderate Depression. Consider booking a confidential counsellor session.", color: "#FF9900" }, // Orange Warning
+                { score: 15, text_en: "Moderately Severe Depression. Seeking professional help is highly recommended.", color: "#FF6666" }, // Light Red Warning
+                { score: 20, text_en: "Severe Depression. Please reach out to your campus helpline immediately.", color: "red" } // High Severity Red
+            ];
+
+            const questionsArea = document.getElementById('questions-area');
+            const form = document.getElementById('phq-form');
+            const resultsArea = document.getElementById('results-area');
+            const resultsScore = document.getElementById('results-score');
+            const resultsInterpretation = document.getElementById('results-interpretation');
+
+            const renderQuestions = (questions, options) => {
+                questionsArea.innerHTML = '';
+                questions.forEach((qText, index) => {
+                    const qNum = index + 1;
+                    const questionCard = document.createElement('div');
+                    questionCard.className = 'question-card';
+                    questionCard.innerHTML = `
+                        <h4>Q${qNum}. ${qText}?</h4>
+                        <div class="answer-options">
+                            <input type="radio" id="q${qNum}-0" name="q${qNum}" value="0" required><label for="q${qNum}-0">${options['0']}</label>
+                            <input type="radio" id="q${qNum}-1" name="q${qNum}" value="1"><label for="q${qNum}-1">${options['1']}</label>
+                            <input type="radio" id="q${qNum}-2" name="q${qNum}" value="2"><label for="q${qNum}-2">${options['2']}</label>
+                            <input type="radio" id="q${qNum}-3" name="q${qNum}" value="3"><label for="q${qNum}-3">${options['3']}</label>
+                        </div>
+                    `;
+                    questionsArea.appendChild(questionCard);
+                });
+            };
+
+            // Initial render
+            renderQuestions(PHQ9_QUESTIONS_EN, ANSWER_OPTIONS_EN);
+
+            // --- Form Submission Logic ---
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let totalScore = 0;
+                let interpretation = INTERPRETATIONS[0];
+
+                PHQ9_QUESTIONS_EN.forEach((_, index) => {
+                    const qNum = index + 1;
+                    const selected = document.querySelector(`input[name="q${qNum}"]:checked`);
+                    if (selected) {
+                        totalScore += parseInt(selected.value);
+                    }
+                });
+
+                // Find Interpretation
+                for (const item of INTERPRETATIONS) {
+                    if (totalScore >= item.score) {
+                        interpretation = item;
+                    }
+                }
+
+                // Display Results
+                resultsScore.textContent = totalScore;
+                resultsScore.style.color = interpretation.color;
+                resultsInterpretation.textContent = interpretation.text_en;
+                resultsInterpretation.style.color = interpretation.color;
+                
+                resultsArea.style.display = 'block';
+                resultsArea.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

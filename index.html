@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saathi | Your Center of Calm</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        /* index.css specific styles (Green Theme) */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            min-height: 90vh;
+            padding-top: 5rem;
+        }
+
+        .hero-content {
+            padding-right: 2rem;
+        }
+        .hero-content p {
+            max-width: 500px;
+            margin: 1.5rem 0 2.5rem;
+        }
+        
+        /* AI Chat Mockup Container - Green Theme */
+        .ai-chat-mockup {
+            background-color: var(--color-bg-card);
+            border-radius: 20px;
+            /* Restored pulsing border effect */
+            box-shadow: var(--shadow-soft);
+            height: 500px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--color-accent-secondary);
+            animation: pulse-border 5s infinite alternate ease-in-out; 
+        }
+        @keyframes pulse-border {
+            0% { border-color: var(--color-accent-secondary); box-shadow: var(--shadow-soft); }
+            100% { border-color: var(--color-accent-primary); box-shadow: var(--glow-effect), var(--shadow-soft); }
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            background-color: var(--color-accent-secondary); 
+            padding: 0.8rem 1rem;
+            border-radius: 15px 15px 0 0;
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+            border-bottom: 1px solid var(--color-accent-primary);
+        }
+        .ai-avatar {
+            font-size: 2.5rem;
+            color: var(--color-accent-primary);
+            margin-right: 1rem;
+        }
+        .chat-messages {
+            height: 350px;
+            overflow-y: auto;
+            padding-right: 10px; 
+        }
+        .message-bubble {
+            padding: 0.7rem 1.2rem;
+            border-radius: 18px;
+            margin-bottom: 1rem;
+            max-width: 80%;
+            font-size: 0.95rem;
+        }
+        /* Find and UPDATE these two styles in your <style> block inside index.html */
+
+.ai-message {
+    /* Adjusted background to a secondary dark color */
+    background-color: var(--color-bg-secondary); 
+    margin-right: auto;
+    color: var(--color-text-primary);
+}
+
+.user-message {
+    background-color: var(--color-accent-primary);
+    margin-left: auto;
+    /* Changed color from --color-bg-primary (white) to a brighter white for contrast on dark green */
+    color: white; 
+    text-shadow: none;
+}
+        
+        /* New Section for Screening CTA */
+        .screening-cta-section {
+            background-color: var(--color-accent-secondary);
+            padding: 4rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--color-accent-primary);
+            border-bottom: 1px solid var(--color-accent-primary);
+        }
+        .screening-cta-section h3 {
+            font-size: 2rem;
+            color: var(--color-text-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <span class="material-icons">self_improvement</span>
+            Saathi
+        </div>
+        
+        <div class="header-right-container">
+            <nav class="nav-links">
+                <a href="index.html" style="color: var(--color-accent-primary); font-weight: 600;">Home</a>
+                <a href="screening.html">Screening</a>
+                <a href="appointments.html">Appointments</a>
+                <a href="resources.html">Resources</a>
+                <a href="forum.html">Peer Support</a>
+                <a href="tracker.html">Habits</a>
+            </nav>
+            <a href="auth.html" class="cta-button">Join Saathi</a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Saathi: Your Center of Calm. Student Wellness Redefined.</h1>
+            <p>Our one-stop solution provides **stigma-free, accessible, and scalable psychological support** for students in higher education. Connect with our hyper-realistic AI or find a counselor, 24/7.</p>
+            <a href="resources.html" class="cta-button">Start Your Session Now</a>
+        </div>
+        
+        <div class="ai-chat-mockup">
+            <div class="chat-header">
+                <span class="material-icons ai-avatar">psychology</span>
+                <div style="line-height: 1;">
+                    <strong style="color: var(--color-text-primary);">Saathi AI</strong>
+                    <p style="font-size: 0.8rem; margin: 0; color: var(--color-success);">Online, ready to talk</p>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="message-bubble ai-message">
+                    Hello! I'm here to listen, without judgment. What’s been on your mind today?
+                </div>
+                <div class="message-bubble user-message">
+                    I feel really stressed about my upcoming exams and assignments.
+                </div>
+                <div class="message-bubble ai-message">
+                    That sounds like a heavy burden. It’s completely normal to feel that way. Can you tell me one specific thing that is causing the most stress right now?
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message..." disabled>
+                <button class="send-button" disabled>
+                    <span class="material-icons">send</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="screening-cta-section">
+        <h3>Feeling Unsure? Start Your Confidential Wellness Check</h3>
+        <p style="max-width: 600px; margin: 0 auto 2rem; color: var(--color-text-primary);">Use AI and screening tools like **PHQ-9 and GAD-7** for early detection of stress, anxiety, or depression. Your results are anonymous and private.</p>
+        <a href="screening.html" class="cta-button" style="padding: 1rem 3rem; font-size: 1.1rem;">Take the Screening Now <span class="material-icons" style="margin-left: 5px;">arrow_forward</span></a>
+    </section>
+
+    <section class="features-section">
+        <h2>Your Holistic Student Support System</h2>
+        <div class="staggered-layout">
+            
+            <a href="resources.html" class="feature-link">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper"><span class="material-icons">psychology</span></div>
+                    <div class="card-text-content">
+                        <h3>AI Companion Chat</h3>
+                        <p>Saathi AI is integrated to conduct hyper-realistic conversational therapy sessions. It offers confidential, AI-guided first-aid support and coping strategies for students 24/7. This helps to bridge the gap in providing a structured, centralized intervention system for mental health.</p>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="appointments.html" class="feature-link">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper"><span class="material-icons">event_available</span></div>
+                    <div class="card-text-content">
+                        <h3>Confidential Booking System</h3>
+                        <p>Provides a confidential booking system for easy and private one-on-one sessions with verified on-campus counsellors and experts. This encourages students to seek help without the fear of judgment, ensuring a stigma-free experience.</p>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="forum.html" class="feature-link">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper"><span class="material-icons">group</span></div>
+                    <div class="card-text-content">
+                        <h3>Anonymous Peer Support Forum</h3>
+                        <p>A safe, peer-moderated platform where students can connect, share experiences, and receive relatable support from others in a judgment-free space. This model eases the load on professional counsellors.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="tracker.html" class="feature-link">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper"><span class="material-icons">insights</span></div>
+                    <div class="card-text-content">
+                        <h3>Admin Dashboard & Actionable Insights</h3>
+                        <p>The admin dashboard gives college authorities analytics from screening tools (like PHQ-9 and GAD-7) to enable early detection and plan preventive measures. This helps in optimizing counsellor availability based on data-driven decisions.</p>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    </section>
+<body>
+<script src='https://cdn.jotfor.ms/agent/embedjs/019ae01db95a704db97870d05851c426d9c3/embed.js'>
+</script>
+    <footer>
+        <h3>Saathi - Your Partner for Mental Wellness</h3>
+        <div class="links">
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="auth.html">Admin Login</a>
+        </div>
+        <p style="margin-top: 10px;">&copy; 2025 Saathi | <span>Team PsyConnect</span>. All rights reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">A dedicated solution for the **Smart India Hackathon 2025** (Problem Statement ID: 25092).</p>
+    </footer>
+    
+    <script src="index.js"></script>
+</body>
+</html>

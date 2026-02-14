@@ -1,0 +1,328 @@
+/* style.css - Global Styles (Vibrant Green & Soft Gray Theme) */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+/* Material Design Icons */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* style.css - DARK MODE COLOR VARIABLES */
+:root {
+    /* --- Base Colors (Dark Theme) --- */
+    --color-bg-primary: #121212; /* Deep Dark Background */
+    --color-bg-secondary: #1E1E1E; /* Slightly Lighter Dark for sections/cards */
+    --color-bg-card: #282828; /* Card Background */
+    
+    /* --- Text Colors --- */
+    --color-text-primary: #E0E0E0; /* Light Text for Headings/Main Content */
+    --color-text-secondary: #B0B0B0; /* Slightly Muted Light Text for Paragraphs */
+
+    /* --- Primary Accent (Vibrant Green - Remains the Same) --- */
+    --color-accent-primary: #34A853; /* Vibrant Green (Google Green) */
+    --color-accent-secondary: #1F3025; /* Muted Green/Dark Accent (Used for borders/secondary backgrounds) */
+    
+    /* --- Feedback Colors --- */
+    --color-error: #CF6679; /* Soft Red for Errors */
+    --color-success: #4CAF50; /* Standard Green for Success/Online */
+
+    /* --- Shadows and Effects (Adjusted for Dark Theme) --- */
+    --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.4);
+    --glow-effect: 0 0 15px rgba(52, 168, 83, 0.6); /* Green Glow */
+
+    /* --- Typography and Transition (Remain the Same) --- */
+    --font-family-primary: 'Inter', sans-serif;
+    --transition-speed-fast: 150ms;
+    --transition-speed-medium: 300ms;
+}
+
+/* --- You must also adjust the body background and text color to use the new variables --- */
+body {
+    background-color: var(--color-bg-primary); /* Use the new dark background */
+    color: var(--color-text-primary); /* Use the new light text */
+    font-family: var(--font-family-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- You must also adjust h2, h3 colors if they had a specific color --- */
+h1, h2, h3 {
+    color: var(--color-text-primary);
+    font-weight: 800;
+}
+
+/* Global Reset and Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Reduced Headline Size */
+h1 {
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem); 
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--color-text-primary);
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--color-accent-primary);
+    border-radius: 2px;
+}
+
+
+p {
+    color: var(--color-text-secondary);
+}
+
+a {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    transition: color var(--transition-speed-medium) var(--bezier-smooth);
+}
+a:hover {
+    color: var(--color-text-primary);
+}
+
+/* Header (Alignment Fixed by simple flex) */
+.main-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.95); 
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-accent-secondary);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--color-accent-primary);
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+}
+.logo .material-icons {
+    margin-right: 8px;
+    font-size: 2rem;
+    color: var(--color-accent-primary);
+}
+
+/* Container for navigation and CTA - crucial for horizontal flow */
+.header-right-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; 
+}
+
+.nav-links a {
+    margin-left: 1rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all var(--transition-speed-medium);
+}
+.nav-links a:hover {
+    background-color: var(--color-accent-secondary);
+    color: var(--color-accent-primary);
+}
+
+.cta-button {
+    background: var(--color-accent-primary);
+    color: var(--color-bg-primary);
+    font-weight: 700;
+    padding: 0.7rem 1.6rem;
+    border: none;
+    border-radius: 30px; 
+    cursor: pointer;
+    margin-left: 2rem;
+    transition: all var(--transition-speed-slow) var(--bezier-smooth);
+    box-shadow: 0 5px 15px rgba(52, 168, 83, 0.3); /* Green Shadow */
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    background-color: #2D9648; /* Darker Green */
+    box-shadow: 0 8px 20px rgba(52, 168, 83, 0.5);
+}
+
+/* Sections */
+section {
+    padding: 6rem 5%;
+    min-height: 70vh;
+}
+
+/* Footer */
+footer {
+    padding: 3rem 5%; 
+    text-align: center;
+    background-color: var(--color-bg-card);
+    border-top: 5px solid var(--color-accent-primary); 
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+}
+footer h3 {
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+}
+footer .links a {
+    margin: 0 10px;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+/* Utility Class for Content Cards */
+.card-container {
+    background-color: var(--color-bg-card);
+    padding: 2rem;
+    border-radius: 18px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--color-accent-secondary);
+    transition: all var(--transition-speed-medium) var(--bezier-smooth);
+    position: relative; 
+}
+.card-container:hover {
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 8px 25px rgba(52, 168, 83, 0.15); /* Green Hover Shadow */
+}
+
+
+/* style.css - NEW VERTICAL STACK LAYOUT WITH ANIMATION */
+
+/* --- Keyframe Animation for Fade-In Effect --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- NEW Feature Vertical Stack Layout --- */
+.staggered-layout {
+    display: flex; /* Use flexbox for vertical stacking */
+    flex-direction: column; /* Force vertical stacking */
+    gap: 2rem; /* Consistent gap between cards */
+    max-width: 800px; /* Constrain card width for a clean look */
+    margin: 3rem auto 0;
+    padding: 0 5%;
+}
+
+/* Feature Card Styling */
+.feature-card {
+    background-color: var(--color-bg-card);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-accent-secondary);
+    
+    /* Card Content Layout (Icon on left, Text on right) */
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start; /* Align icon and text at the top */
+    height: auto; 
+    
+    /* Animation Properties */
+    opacity: 0; /* Start hidden for animation */
+    animation: fadeInUp 0.6s ease forwards; /* Apply animation */
+    transition: border-color 0.3s ease;
+}
+
+/* Staggered Animation Timing */
+.staggered-layout a:nth-child(1) .feature-card {
+    animation-delay: 0.1s;
+}
+.staggered-layout a:nth-child(2) .feature-card {
+    animation-delay: 0.2s;
+}
+.staggered-layout a:nth-child(3) .feature-card {
+    animation-delay: 0.3s;
+}
+.staggered-layout a:nth-child(4) .feature-card {
+    animation-delay: 0.4s;
+}
+
+.feature-card:hover {
+    border-color: var(--color-accent-primary);
+}
+
+/* Icon Styling */
+.feature-icon-wrapper {
+    flex-shrink: 0; 
+    min-width: 70px;
+    height: 70px;
+    background: var(--color-accent-primary); 
+    color: var(--color-bg-primary);
+    box-shadow: 0 0 15px rgba(52, 168, 83, 0.5);
+    font-size: 2.2rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.card-text-content {
+    text-align: left; 
+}
+
+.card-text-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.card-text-content p {
+    color: var(--color-text-secondary);
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    .feature-card {
+        flex-direction: column; /* Stack vertically on small mobile */
+        align-items: center;
+        text-align: center;
+    }
+    .feature-icon-wrapper {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}

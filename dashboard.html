@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Saathi</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>body { background: linear-gradient(135deg, var(--secondary-green) 0%, #A8DADC 100%); }</style>
+</head>
+<body>
+    <header><h1>Your Wellness Dashboard</h1></header>
+    <nav><a href="chatbot.html">Chatbot</a> | <a href="resources.html">Resources</a> | <a href="index.html">Logout</a></nav>
+    <main class="container grid">
+        <div class="card fade-in">
+            <h3>Streak Tracker</h3>
+            <p>Days: <span id="streak">5</span></p>
+            <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+            <button onclick="updateStreak()">Log Activity</button>
+        </div>
+        <div class="card fade-in">
+            <h3>Mood Journal</h3>
+            <textarea placeholder="How are you feeling?"></textarea>
+            <button onclick="saveJournal()">Save</button>
+        </div>
+        <div class="card fade-in">
+            <h3>Quick Tips</h3>
+            <p>Try deep breathing for stress. Track your progress!</p>
+        </div>
+    </main>
+    <footer>&copy; 2023 Saathi.</footer>
+    <script src="js/script.js"></script>
+    <script>
+        function updateStreak() {
+            const streak = document.getElementById('streak');
+            streak.textContent = parseInt(streak.textContent) + 1;
+            triggerConfetti();
+        }
+    </script>
+</body>
+</html>

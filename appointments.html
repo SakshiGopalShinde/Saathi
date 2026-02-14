@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saathi | Book Appointment</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .appointment-section {
+            padding-top: 5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Step Indicator */
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            height: 2px;
+            background-color: var(--color-accent-secondary);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--color-accent-secondary);
+            color: var(--color-text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            transition: background-color 300ms;
+        }
+        .step.active .step-circle {
+            background-color: var(--color-accent-primary);
+            box-shadow: var(--glow-effect);
+        }
+        .step.completed .step-circle {
+            background-color: var(--color-success);
+        }
+        .step-label {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Booking Card */
+        #booking-card {
+            min-height: 450px;
+            padding: 3rem;
+            position: relative;
+        }
+
+        /* Step Content Containers */
+        .step-content {
+            display: none;
+        }
+        .step-content.active {
+            display: block;
+        }
+
+        /* Counselor List */
+        .counselor-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .counselor-card {
+            background-color: #272B40; 
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 300ms var(--bezier-smooth);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .counselor-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent-secondary);
+        }
+        .counselor-card.selected {
+            border-color: var(--color-accent-primary);
+            box-shadow: var(--glow-effect);
+            background-color: #2F2A52;
+        }
+        .counselor-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--color-accent-primary);
+            margin-bottom: 1rem;
+        }
+        .counselor-card h4 {
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Date/Time Picker */
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        .time-slot {
+            padding: 0.7rem 1rem;
+            background-color: #2F2A52;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid var(--color-accent-secondary);
+            transition: all 200ms;
+        }
+        .time-slot:hover {
+            background-color: var(--color-accent-secondary);
+        }
+        .time-slot.selected {
+            background-color: var(--color-accent-primary);
+            color: var(--color-bg-primary);
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            border-top: 1px solid var(--color-accent-secondary);
+            padding-top: 1.5rem;
+        }
+        .nav-button {
+            background: var(--color-accent-primary);
+            color: var(--color-bg-primary);
+            padding: 0.7rem 1.6rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 300ms;
+        }
+        #prev-step {
+            background: var(--color-accent-secondary);
+            color: var(--color-text-primary);
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <span class="material-icons">self_improvement</span>
+            Saathi
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="appointments.html">Appointments</a>
+            <a href="resources.html">Resources</a>
+            <a href="forum.html">Peer Support</a>
+            <a href="tracker.html">Habits</a>
+        </nav>
+        <a href="auth.html" class="cta-button">Join Saathi</a>
+    </header>
+
+    <section class="appointment-section">
+        <h2>Confidential Counsellor Booking</h2>
+        
+        <div class="step-indicator">
+            <div class="step active" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Select Counsellor</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Select Date & Time</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Confirm Details</div>
+            </div>
+        </div>
+
+        <div id="booking-card" class="card-container">
+            
+            <div id="step-1" class="step-content active">
+                <h3>Step 1: Choose Your Professional</h3>
+                <p style="margin-bottom: 2rem;">Select a verified campus professional specializing in your area of need.</p>
+                <div class="counselor-list-grid">
+                    <div class="counselor-card" data-counselor-id="1" data-counselor-name="Dr. K. Mehlia" data-specialty="Stress Management">
+                        <img src="https://via.placeholder.com/80/8C8CFF/110D2C?text=KM" alt="Dr. Mehlia">
+                        <h4>Dr. K. Mehlia</h4>
+                        <p style="font-size: 0.9rem;">Stress Management</p>
+                    </div>
+                    <div class="counselor-card" data-counselor-id="2" data-counselor-name="Dr. Singhania" data-specialty="Career & Anxiety">
+                        <img src="https://via.placeholder.com/80/8C8CFF/110D2C?text=DS" alt="Dr. Singhania">
+                        <h4>Dr. Singhania</h4>
+                        <p style="font-size: 0.9rem;">Career & Anxiety</p>
+                    </div>
+                    <div class="counselor-card" data-counselor-id="3" data-counselor-name="Dr. S. Mehta" data-specialty="Sleep & Focus">
+                        <img src="https://via.placeholder.com/80/8C8CFF/110D2C?text=SM" alt="Dr. S. Mehta">
+                        <h4>Dr. S. Mehta</h4>
+                        <p style="font-size: 0.9rem;">Sleep & Focus</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step-2" class="step-content">
+                <h3>Step 2: Select Date & Time</h3>
+                <p id="counsellor-details" style="margin-bottom: 1rem; color: var(--color-accent-primary); font-weight: 500;">Counsellor: **Not Selected**</p>
+                
+                <div class="input-group">
+                    <label for="date-input">Available Dates</label>
+                    <input type="date" id="date-input" required>
+                </div>
+                
+                <label style="margin-top: 1rem; display: block;">Available Time Slots (60 min)</label>
+                <div class="time-slots">
+                    <div class="time-slot" data-time="09:00">09:00 AM</div>
+                    <div class="time-slot" data-time="11:00">11:00 AM</div>
+                    <div class="time-slot" data-time="14:00">02:00 PM</div>
+                    <div class="time-slot" data-time="16:00">04:00 PM</div>
+                    <div class="time-slot" data-time="18:00">06:00 PM</div>
+                </div>
+            </div>
+
+            <div id="step-3" class="step-content">
+                <h3>Step 3: Confirm Booking</h3>
+                <p>Please review your details before confirming your confidential session.</p>
+                <div style="margin-top: 2rem; padding: 1.5rem; background-color: #2F2A52; border-radius: 12px;">
+                    <p style="color: var(--color-accent-primary); font-weight: 600;">Counsellor: <span id="confirm-counsellor"></span></p>
+                    <p style="margin-top: 0.5rem;">Specialty: <span id="confirm-specialty"></span></p>
+                    <p style="margin-top: 0.5rem;">Date: <span id="confirm-date"></span></p>
+                    <p style="margin-top: 0.5rem;">Time: <span id="confirm-time"></span></p>
+                    <p style="margin-top: 1rem; color: var(--color-success); font-weight: 600;">Mode: Virtual Session (Link will be emailed)</p>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button id="prev-step" class="nav-button" disabled>Previous</button>
+                <button id="next-step" class="nav-button" disabled>Next</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Saathi | Team PsyConnect. All rights reserved.</p>
+    </footer>
+    
+    <script src="appointments.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saathi | Daily Habit Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .tracker-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-top: 2rem;
+        }
+
+        /* Summary Card with Progress Ring */
+        .summary-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--color-accent-primary);
+        }
+
+        .progress-ring-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+        .progress-ring {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+        .progress-ring-circle {
+            stroke: var(--color-accent-secondary);
+            stroke-width: 10;
+            fill: transparent;
+        }
+        #progress-bar {
+            stroke: var(--color-success);
+            stroke-width: 10;
+            fill: transparent;
+            transition: stroke-dashoffset 0.8s ease-in-out;
+            box-shadow: 0 0 10px var(--color-success);
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .progress-text-percent {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-accent-primary);
+        }
+
+        /* Grid for Habits */
+        .habit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Habit Card Styles */
+        .habit-card {
+            padding: 2rem;
+            border-radius: 18px;
+            cursor: pointer;
+            border: 1px solid var(--color-accent-secondary);
+            transition: all 400ms var(--bezier-smooth);
+            position: relative;
+            overflow: hidden;
+            background-color: var(--color-bg-card);
+        }
+        .habit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-effect);
+        }
+
+        /* Completed State */
+        .habit-card.completed {
+            background-color: #173429; /* Darker success background */
+            border-color: var(--color-success);
+        }
+        .habit-card.completed h4 {
+            color: var(--color-success);
+        }
+
+        /* Checkmark Animation */
+        .checkmark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(112, 224, 167, 0.1); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            color: var(--color-success);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes checkmark-pulse {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+        .checkmark-pulse {
+            animation: checkmark-pulse 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <span class="material-icons">self_improvement</span>
+            Saathi
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="appointments.html">Appointments</a>
+            <a href="resources.html">Resources</a>
+            <a href="forum.html">Peer Support</a>
+            <a href="tracker.html">Habits</a>
+        </nav>
+        <a href="auth.html" class="cta-button">Join Saathi</a>
+    </header>
+
+    <section>
+        <h2>Your Daily Wellness Streak</h2>
+        <div class="tracker-container">
+            
+            <div class="summary-card card-container">
+                <div class="progress-ring-container">
+                    <svg class="progress-ring" width="150" height="150">
+                        <circle class="progress-ring-circle" stroke-dasharray="440" stroke-dashoffset="0" cx="75" cy="75" r="70"></circle>
+                        <circle id="progress-bar" class="progress-ring-circle" stroke-dasharray="440" stroke-dashoffset="440" cx="75" cy="75" r="70"></circle>
+                    </svg>
+                    <div class="progress-text">
+                        <div class="progress-text-percent" id="progress-percent">0%</div>
+                        <p style="font-size: 0.8rem; color: var(--color-text-secondary);">Completed</p>
+                    </div>
+                </div>
+
+                <div class="summary-details">
+                    <p style="font-size: 1.1rem; color: var(--color-text-primary);">Today's Focus</p>
+                    <div id="tracker-summary" style="font-size: 1.8rem; font-weight: 600; color: var(--color-accent-primary);">0/5 Habits Tracked</div>
+                    <p style="margin-top: 1rem;">Click any habit to mark it as complete.</p>
+                </div>
+            </div>
+
+            <div class="habit-grid" id="habit-grid">
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Saathi | Team PsyConnect. All rights reserved.</p>
+    </footer>
+    
+    <script src="tracker.js"></script>
+</body>
+</html>
