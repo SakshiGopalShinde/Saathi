@@ -193,8 +193,4 @@ It is a scalable, open-source platform designed especially for academic institut
 
 ---
 
-## Contributing
 
-Contributions are welcome. Feel free to open issues or submit pull requests.
-
----
