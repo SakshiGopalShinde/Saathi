@@ -191,6 +191,4 @@ Saathi bridges this gap by providing:
 
 It is a scalable, open-source platform designed especially for academic institutions.
 
----
-
 
